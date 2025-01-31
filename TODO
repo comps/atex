@@ -1,0 +1,22 @@
+
+virsh -c 'qemu+ssh://some-host/system?command=/tmp/myssh' dominfo blabla
+
+
+/tmp/myssh:
+#!/bin/sh
+exec ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectionAttempts=5 -oConnectTimeout=60 -oServerAliveInterval=5 -oServerAliveCountMax=60 "$@"
+
+(or connect to Master socket)
+
+
+$ ssh -o ControlMaster=yes -o ControlPath=~/control \
+      -o ControlPersist=yes -N user@host
+
+$ ssh -o ControlPath=~/control ignored_arg ls /one
+...
+
+$ ssh -o ControlPath=~/control ignored_arg ls /two
+...
+
+$ ssh -o ControlPath=~/control -O exit ignored_arg
+Exit request sent.

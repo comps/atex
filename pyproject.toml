@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "atex"
+version = "1"
+license = "GPL-3.0-or-later"
+requires-python = ">= 3.9"
+dependencies = []
+
+[tool.hatch.build.targets.wheel.sources]
+"" = "atex"
+
+[tool.hatch.build.targets.wheel]
+include = ["*.py", "*.sh"]
+
+[project.scripts]
+foobar = "atex:foobar.main"
